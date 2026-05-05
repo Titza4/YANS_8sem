@@ -1,0 +1,40 @@
+enum class Role {
+    EMPLOYEE,
+    ENGINEER,
+    ADMIN
+}
+
+enum class TicketStatus {
+    NEW,
+    ASSIGNED,
+    IN_PROGRESS,
+    COMPLETED,
+    CLOSED
+}
+
+data class User(
+    val id: String,
+    val name: String,
+    val email: String,
+    val role: Role
+)
+
+data class Ticket(
+    val id: String,
+    val title: String,
+    val description: String,
+    val location: String,
+    val creator: User,
+    var executor: User? = null,
+    var status: TicketStatus = TicketStatus.NEW
+) {
+
+    fun updateStatus(newStatus: TicketStatus) {
+        status = newStatus
+    }
+
+    fun assignExecutor(user: User) {
+        executor = user
+        status = TicketStatus.ASSIGNED
+    }
+}
